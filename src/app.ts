@@ -13,6 +13,7 @@ class App {
 	private canNotify: boolean;
 	private playSoundInput: HTMLInputElement = document.querySelector('#playSound');
 	private audio: HTMLAudioElement = document.querySelector('audio');
+	private testNotificationBtn: HTMLElement = document.querySelector('[test-notification]');
 
 	constructor() {
 		this.initNotifications();
@@ -21,6 +22,8 @@ class App {
 			this.updateRemaining();
 			this.startTimers();
 		});
+
+		this.testNotificationBtn.addEventListener('click', this.testNotifications);
 	}
 
 	private initNotifications(): void {
@@ -33,6 +36,11 @@ class App {
 				}
 			});
 		}
+	}
+
+	@autobind
+	private testNotifications(): void {
+		this.notify('TEST', 'TEST');
 	}
 
 	private startTimers(): void {
