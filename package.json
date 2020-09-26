@@ -1,0 +1,17 @@
+{
+  "name": "nvidia-3080-checker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:xposedbones/nvidia-3080-checker.git",
+  "author": "Benoit Lavoie-lamer <iam@xposedbones.com>",
+  "license": "MIT",
+  "dependencies": {
+    "autobind-decorator": "^2.4.0",
+    "bootstrap": "^4.5.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.11",
+    "typescript": "^4.0.3"
+  }
+}
