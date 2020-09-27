@@ -8,12 +8,14 @@
 </head>
 <body>
 	<div class="container">
-		<div class="jumbotron mt-4">
+		<div class="jumbotron my-4">
 			<h1 class="display-4">NVIDIA 3080 FE</h1>
-			<p class="lead">Simple website that will check at a specified interval if the stock of the 3080 FE changed. </p>
+			<p class="lead">Simple website that will check at a 60s interval if the stock of the 3080 FE changed. </p>
 			<hr class="my-4">
 			<p>It fetches the same json file that the website uses to display their 'Out of stock/Add to cart'. If the status change in any sort of way, this website will send you an alert and push notification if you allow it.</p>
-
+			<p>Leave this page running in the background to get a notification. When you get a notification, clicking on it will open up NVIDIA's store, ready for you to click on that nice add to cart button.</p>
+			<p>Good luck 🙏</p>
+			<hr class="my-4">
 			<a href="https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" target="_blank" class="btn btn-success">Visit NVIDIA Store</a>
 			<button class="btn btn-primary" test-notification>Test Notification</button>
 			<div class="form-check mt-4">
@@ -24,7 +26,7 @@
 			  </div>
 		</div>
 
-		<div class="mt-4">
+		<div class="my-4">
 			<ul class="list-group">
 				<li class="list-group-item d-flex justify-content-between align-items-center">
 					Last status
