@@ -85,7 +85,7 @@ class App {
 			case 'PRODUCT_INVENTORY_IN_STOCK':
 				return 'In stock';
 			default:
-				return 'Out of stock';
+				return status;
 		}
 	}
 
