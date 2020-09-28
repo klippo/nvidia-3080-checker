@@ -18,14 +18,14 @@ class App {
 	private testNotificationBtn: HTMLElement = document.querySelector('[test-notification]');
 	private scans: Scan[] = [];
 	private maxScansHolder: HTMLElement = document.querySelector('.list-group__last');
-	private maxScansInMemory: number = 10;
+	private maxScansInMemory: number = 30;
 	//#endregion
 
 	//#region Lit HTML
 	private scanTemplate = (scan: Scan) => html`
 		<li class="list-group-item d-flex justify-content-between align-items-center">
-			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '') +
-		scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '') + scan.timestamp.getSeconds()}
+			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '' ) +
+				scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '' ) + scan.timestamp.getSeconds()}
 				<span class="badge badge-primary badge-pill badge-status">
 				${scan.status}</span>
 		</li>
