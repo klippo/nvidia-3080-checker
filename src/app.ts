@@ -1,11 +1,13 @@
 import autobind from 'autobind-decorator';
+import { html, render } from 'lit-html';
 import { Nvidia, ProductEntity } from './nvidia';
 import { PushNotifications } from './PushNotification';
 
 class App {
+	//#region Properties
 	private url: string = "https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700";
 	private storeUrl: string = "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/";
-	private interval: number = 60;
+	private interval: number = 15;
 	private currentTimer: number = 0;
 	private remainingElement: HTMLElement = document.querySelector('.badge-remaining');
 	private statusElement: HTMLElement = document.querySelector('.badge-status');
@@ -14,6 +16,21 @@ class App {
 	private playSoundInput: HTMLInputElement = document.querySelector('#playSound');
 	private audio: HTMLAudioElement = document.querySelector('audio');
 	private testNotificationBtn: HTMLElement = document.querySelector('[test-notification]');
+	private scans: Scan[] = [];
+	private maxScansHolder: HTMLElement = document.querySelector('.list-group__last');
+	private maxScansInMemory: number = 10;
+	//#endregion
+
+	//#region Lit HTML
+	private scanTemplate = (scan: Scan) => html`
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '') +
+		scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '') + scan.timestamp.getSeconds()}
+				<span class="badge badge-primary badge-pill badge-status">
+				${scan.status}</span>
+		</li>
+	`
+	//#endregion
 
 	constructor() {
 		this.initNotifications();
@@ -22,7 +39,10 @@ class App {
 			this.updateRemaining();
 			this.startTimers();
 		});
+		this.bindEvents();
+	}
 
+	private bindEvents(): void {
 		this.testNotificationBtn.addEventListener('click', this.testNotifications);
 	}
 
@@ -74,6 +94,7 @@ class App {
 			this.notify(this.currentStatus, status);
 		}
 
+		this.addLastScan(status);
 		this.currentStatus = status;
 
 	}
@@ -131,6 +152,32 @@ class App {
 		this.audio.volume = 1;
 		this.audio.play();
 	}
+
+	private addLastScan(status: string) {
+		const now: Date = new Date();
+		const scanObj: Scan = {
+			timestamp: now,
+			status
+		};
+
+		this.scans.unshift(scanObj);
+		if (this.scans.length > this.maxScansInMemory)
+			this.scans.pop();
+
+		this.renderLastScans();
+	}
+
+	private renderLastScans(): void {
+		const template = (scans: Scan[]) => html`
+			${scans.map(scan => this.scanTemplate(scan))}
+		`;
+		render(template(this.scans), this.maxScansHolder);
+	}
 }
 
 new App();
+
+interface Scan {
+	timestamp: Date;
+	status: string;
+}

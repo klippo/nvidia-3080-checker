@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="jumbotron my-4">
 			<h1 class="display-4">NVIDIA 3080 FE</h1>
-			<p class="lead">Simple website that will check at a 60s interval if the stock of the 3080 FE changed. </p>
+			<p class="lead">Simple website that will check at a 15s interval if the stock of the 3080 FE changed. </p>
 			<hr class="my-4">
 			<p>It fetches the same json file that the website uses to display their 'Out of stock/Add to cart'. If the status change in any sort of way, this website will send you an alert and push notification if you allow it.</p>
 			<p>Leave this page running in the background to get a notification. When you get a notification, clicking on it will open up NVIDIA's store, ready for you to click on that nice add to cart button.</p>
@@ -36,6 +36,12 @@
 					Next scan in
 					<span class="badge badge-primary badge-pill badge-remaining"></span>
 				</li>
+			</ul>
+		</div>
+
+		<h2 class="display-6">Last 10 scans</h2>
+		<div class="my-4">
+			<ul class="list-group list-group__last">
 			</ul>
 		</div>
 	</div>
