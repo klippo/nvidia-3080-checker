@@ -25,8 +25,8 @@ class App {
 	//#region Lit HTML
 	private scanTemplate = (scan: Scan) => html`
 		<li class="list-group-item d-flex justify-content-between align-items-center">
-			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '' ) +
-				scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '' ) + scan.timestamp.getSeconds()}
+			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '') +
+		scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '') + scan.timestamp.getSeconds()}
 				<span class="badge badge-primary badge-pill badge-status">
 				${scan.status}</span>
 		</li>
@@ -109,7 +109,9 @@ class App {
 
 	private getCountry(): string {
 		const selected: string = this.storesSelect.options[this.storesSelect.selectedIndex].value;
-		return selected.split(':')[0];
+		const country: string = selected.split(':')[0];
+
+		return country === "no-no" ? "nb-no" : country;
 	}
 
 	private buildAPIUrl(): string {
@@ -145,7 +147,6 @@ class App {
 	}
 
 	private async getData(): Promise<Nvidia> {
-		console.log(this.url);
 		const data = await fetch(this.url);
 		const json = await data.json();
 
