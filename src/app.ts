@@ -120,7 +120,7 @@ class App {
 		const locale: string = storeArr[0].replace('-', '_');
 		const currency: string = storeArr[1];
 		const id: string = storeArr[2];
-		return `https://api-prod.nvidia.com/direct-sales-shop/DR/products/${locale}/${currency}/${id}`;
+		return `https://api-prod.nvidia.com/direct-sales-shop/DR/products/${locale === "de_at" ? "de_de" : locale}/${currency}/${id}`;
 	}
 
 	private convertStatus(status: string): string {
