@@ -5,8 +5,9 @@ import { PushNotifications } from './PushNotification';
 
 class App {
 	//#region Properties
+	private storesSelect: HTMLSelectElement = document.querySelector('.store select');
 	private url: string = "https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700";
-	private storeUrl: string = "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/";
+	private storeUrl: string = `https://www.nvidia.com/${this.getCountry()}/geforce/graphics-cards/30-series/rtx-3080/`;
 	private interval: number = 15;
 	private currentTimer: number = 0;
 	private remainingElement: HTMLElement = document.querySelector('.badge-remaining');
@@ -24,8 +25,8 @@ class App {
 	//#region Lit HTML
 	private scanTemplate = (scan: Scan) => html`
 		<li class="list-group-item d-flex justify-content-between align-items-center">
-			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '' ) +
-				scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '' ) + scan.timestamp.getSeconds()}
+			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '') +
+		scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '') + scan.timestamp.getSeconds()}
 				<span class="badge badge-primary badge-pill badge-status">
 				${scan.status}</span>
 		</li>
@@ -34,7 +35,6 @@ class App {
 
 	constructor() {
 		this.initNotifications();
-
 		this.fetch().then(() => {
 			this.updateRemaining();
 			this.startTimers();
@@ -44,6 +44,7 @@ class App {
 
 	private bindEvents(): void {
 		this.testNotificationBtn.addEventListener('click', this.testNotifications);
+		this.storesSelect.addEventListener('change', this.onStoreChange);
 	}
 
 	private initNotifications(): void {
@@ -61,6 +62,12 @@ class App {
 	@autobind
 	private testNotifications(): void {
 		this.notify('TEST', 'TEST');
+	}
+
+	@autobind
+	private onStoreChange(): void {
+		this.storeUrl = `https://www.nvidia.com/${this.getCountry()}/geforce/graphics-cards/30-series/rtx-3080/`;
+		(document.querySelector('.actions > a') as HTMLAnchorElement).href = this.storeUrl;
 	}
 
 	private startTimers(): void {
@@ -97,6 +104,10 @@ class App {
 		this.addLastScan(status);
 		this.currentStatus = status;
 
+	}
+
+	private getCountry(): string {
+		return this.storesSelect.options[this.storesSelect.selectedIndex].value;
 	}
 
 	private convertStatus(status: string): string {

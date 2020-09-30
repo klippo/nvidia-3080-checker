@@ -16,14 +16,43 @@
 			<p>Leave this page running in the background to get a notification. When you get a notification, clicking on it will open up NVIDIA's store, ready for you to click on that nice add to cart button.</p>
 			<p>Good luck 🙏</p>
 			<hr class="my-4">
-			<a href="https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" target="_blank" class="btn btn-success">Visit NVIDIA Store</a>
-			<button class="btn btn-primary" test-notification>Test Notification</button>
+			<div class="actions">
+				<a href="https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" target="_blank" class="btn btn-success">Visit NVIDIA Store</a>
+				<button class="btn btn-primary" test-notification>Test Notification</button>
+				<div class="input-group store">
+					<div class="input-group-prepend">
+					  <label class="input-group-text" for="inputGroupSelect01">Store</label>
+					</div>
+					<select class="custom-select" id="inputGroupSelect01">
+						<option value="de-de"></option>
+						<option value="fr-fr">Belgium</option>
+						<option value="en-us">Canada</option>
+						<option value="en-gb">Czech</option>
+						<option value="en-gb">Denmark</option>
+						<option value="en-gb">Finland</option>
+						<option value="fr-fr">France</option>
+						<option value="de-de">Germany</option>
+						<option value="en-us" selected>USA</option>
+						<option value="en-gb">United Kingdom</option>
+						<option value="en-gb">Ireland</option>
+						<option value="it-it">Italy</option>
+						<option value="sv-se">Sweden</option>
+						<option value="fr-fr">Luxembourg</option>
+						<option value="pl-pl">Poland</option>
+						<option value="en-gb">Portugal</option>
+						<option value="es-es">Spain</option>
+						<option value="no-no">Norway</option>
+					</select>
+				  </div>
+			</div>
 			<div class="form-check mt-4">
-				<input class="form-check-input" type="checkbox" id="playSound" checked>
-				<label class="form-check-label" for="playSound">
-				  Play Sound
-				</label>
-			  </div>
+				<div>
+					<input class="form-check-input" type="checkbox" id="playSound" checked>
+					<label class="form-check-label" for="playSound">
+						Play Sound
+					</label>
+				</div>
+			</div>
 		</div>
 
 		<div class="my-4">
