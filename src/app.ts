@@ -145,6 +145,7 @@ class App {
 	}
 
 	private async getData(): Promise<Nvidia> {
+		console.log(this.url);
 		const data = await fetch(this.url);
 		const json = await data.json();
 
