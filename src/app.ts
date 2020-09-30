@@ -6,7 +6,7 @@ import { PushNotifications } from './PushNotification';
 class App {
 	//#region Properties
 	private storesSelect: HTMLSelectElement = document.querySelector('.store select');
-	private url: string = "https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700";
+	private url: string = this.buildAPIUrl();
 	private storeUrl: string = `https://www.nvidia.com/${this.getCountry()}/geforce/graphics-cards/30-series/rtx-3080/`;
 	private interval: number = 15;
 	private currentTimer: number = 0;
@@ -25,8 +25,8 @@ class App {
 	//#region Lit HTML
 	private scanTemplate = (scan: Scan) => html`
 		<li class="list-group-item d-flex justify-content-between align-items-center">
-			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '') +
-		scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '') + scan.timestamp.getSeconds()}
+			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '' ) +
+				scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '' ) + scan.timestamp.getSeconds()}
 				<span class="badge badge-primary badge-pill badge-status">
 				${scan.status}</span>
 		</li>
@@ -68,6 +68,7 @@ class App {
 	private onStoreChange(): void {
 		this.storeUrl = `https://www.nvidia.com/${this.getCountry()}/geforce/graphics-cards/30-series/rtx-3080/`;
 		(document.querySelector('.actions > a') as HTMLAnchorElement).href = this.storeUrl;
+		this.url = this.buildAPIUrl();
 	}
 
 	private startTimers(): void {
@@ -107,7 +108,17 @@ class App {
 	}
 
 	private getCountry(): string {
-		return this.storesSelect.options[this.storesSelect.selectedIndex].value;
+		const selected: string = this.storesSelect.options[this.storesSelect.selectedIndex].value;
+		return selected.split(':')[0];
+	}
+
+	private buildAPIUrl(): string {
+		const selected: string = this.storesSelect.options[this.storesSelect.selectedIndex].value;
+		const storeArr: string[] = selected.split(':');
+		const locale: string = storeArr[0].replace('-', '_');
+		const currency: string = storeArr[1];
+		const id: string = storeArr[2];
+		return `https://api-prod.nvidia.com/direct-sales-shop/DR/products/${locale}/${currency}/${id}`;
 	}
 
 	private convertStatus(status: string): string {
