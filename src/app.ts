@@ -20,6 +20,9 @@ class App {
 	private scans: Scan[] = [];
 	private maxScansHolder: HTMLElement = document.querySelector('.list-group__last');
 	private maxScansInMemory: number = 30;
+
+	private tickInterval: number;
+	private scanInterval: number;
 	//#endregion
 
 	//#region Lit HTML
@@ -37,7 +40,6 @@ class App {
 		this.initNotifications();
 		this.fetch().then(() => {
 			this.updateRemaining();
-			this.startTimers();
 		});
 		this.bindEvents();
 	}
@@ -72,8 +74,8 @@ class App {
 	}
 
 	private startTimers(): void {
-		window.setInterval(this.tick, 1000);
-		window.setInterval(this.fetch, this.interval * 1000);
+		this.tickInterval = window.setInterval(this.tick, 1000);
+		this.scanInterval = window.setInterval(this.fetch, this.interval * 1000);
 	}
 
 	@autobind
@@ -129,20 +131,35 @@ class App {
 				return 'Out of stock';
 			case 'PRODUCT_INVENTORY_IN_STOCK':
 				return 'In stock';
+			case 'API_DOWN':
+				return 'API Down';
 			default:
 				return status;
 		}
 	}
 
+	private stopTimers(): void {
+		window.clearInterval(this.tickInterval);
+		window.clearInterval(this.scanInterval);
+	}
+
 	@autobind
 	private async fetch() {
 		this.currentTimer = 0;
-		const nvidiaData: Nvidia = await this.getData();
-		const product: ProductEntity = nvidiaData.products.product[0];
-		const { status } = product.inventoryStatus;
+		this.stopTimers();
+		try {
+			const nvidiaData: Nvidia = await this.getData();
+			const product: ProductEntity = nvidiaData.products.product[0];
+			const { status } = product.inventoryStatus;
 
-		if (status) {
-			this.updateStatus(this.convertStatus(status));
+			if (status) {
+				this.updateStatus(this.convertStatus(status));
+				this.startTimers();
+			}
+		} catch {
+			console.warn('API DOWN');
+			this.updateStatus(this.convertStatus('API_DOWN'));
+			this.startTimers();
 		}
 	}
 
