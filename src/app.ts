@@ -28,8 +28,8 @@ class App {
 	//#region Lit HTML
 	private scanTemplate = (scan: Scan) => html`
 		<li class="list-group-item d-flex justify-content-between align-items-center">
-			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '') +
-		scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '') + scan.timestamp.getSeconds()}
+			${scan.timestamp.getHours()}:${(scan.timestamp.getMinutes() < 10 ? '0' : '' ) +
+				scan.timestamp.getMinutes()}:${(scan.timestamp.getSeconds() < 10 ? '0' : '' ) + scan.timestamp.getSeconds()}
 				<span class="badge badge-primary badge-pill badge-status">
 				${scan.status}</span>
 		</li>
@@ -86,11 +86,7 @@ class App {
 
 	private updateRemaining(): void {
 		const remaining: number = this.interval - this.currentTimer;
-		if (remaining == 0) {
-			this.remainingElement.innerHTML = `SCANNING`;
-		} else {
-			this.remainingElement.innerHTML = `${remaining}`;
-		}
+		this.remainingElement.innerHTML = `${remaining}`;
 	}
 
 	private updateStatus(status: string): void {
@@ -141,6 +137,7 @@ class App {
 	private stopTimers(): void {
 		window.clearInterval(this.tickInterval);
 		window.clearInterval(this.scanInterval);
+		this.remainingElement.innerHTML = `SCANNING`;
 	}
 
 	@autobind
