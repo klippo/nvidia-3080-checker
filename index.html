@@ -3,46 +3,47 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>NVIDIA 3080 FE Checker</title>
+	<title>NVIDIA 3090 FE Checker</title>
 	<link rel="stylesheet" href="./src/app.scss">
 </head>
 <body>
 	<div class="container">
 		<div class="jumbotron my-4">
-			<h1 class="display-4">NVIDIA 3080 FE</h1>
-			<p class="lead">Simple website that will check at a 15s interval if the stock of the 3080 FE changed. </p>
+			<h1 class="display-4">NVIDIA 3090 FE</h1>
+			<p class="lead">Simple website that will check at a 15s interval if the stock of the 3090 FE changed. </p>
 			<hr class="my-4">
 			<p>It fetches the same json file that the website uses to display their 'Out of stock/Add to cart'. If the status change in any sort of way, this website will send you an alert and push notification if you allow it.</p>
 			<p>Leave this page running in the background to get a notification. When you get a notification, clicking on it will open up NVIDIA's store, ready for you to click on that nice add to cart button.</p>
 			<p>Good luck 🙏</p>
 			<hr class="my-4">
 			<div class="actions">
-				<a href="https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" target="_blank" class="btn btn-success">Visit NVIDIA Store</a>
+				<a href="https://nvidia.xposedbones.com" target="_blank" class="btn btn-success">3080 FE Edition</a>
+				<a href="https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090/" target="_blank" class="btn btn-success">Visit NVIDIA Store</a>
 				<button class="btn btn-primary" test-notification>Test Notification</button>
 				<div class="input-group store">
 					<div class="input-group-prepend">
 					  <label class="input-group-text" for="inputGroupSelect01">Store</label>
 					</div>
 					<select class="custom-select" id="inputGroupSelect01">
-						<option value="de-at:EUR:5440853700">Austria</option>
-						<option value="fr-fr:EUR:5438795700">Belgium</option>
-						<option value="en-us:CAD:5438481700">Canada</option>
-						<option value="en-gb:CZK:5438793800">Czech</option>
-						<option value="en-gb:DKK:5438793300">Denmark</option>
-						<option value="en-gb:EUR:5438793300">Finland</option>
-						<option value="fr-fr:EUR:5438795200">France</option>
-						<option value="de-de:EUR:5438792300">Germany</option>
-						<option value="en-us:USD:5438481700" selected>USA</option>
-						<option value="en-gb:GBP:5438792800">United Kingdom</option>
-						<option value="en-gb:GBP:5438792800">Ireland</option>
-						<option value="it-it:EUR:5438796200">Italy</option>
-						<option value="sv-se:SEK:5438798100">Sweden</option>
-						<option value="fr-fr:EUR:5438795700">Luxembourg</option>
-						<option value="pl-pl:PLN:5438797700">Poland</option>
-						<option value="en-gb:EUR:5438794300">Portugal</option>
-						<option value="es-es:EUR:5438794800">Spain</option>
-						<option value="no-no:NOK:5438797200">Norway</option>
-						<option value="nl-nl:EUR:5438796700">Netherlands</option>
+						<option value="de-at:EUR:5444941400">Austria</option>
+						<option value="fr-fr:EUR:5438795600">Belgium</option>
+						<option value="en-us:CAD:5438481600">Canada</option>
+						<option value="en-gb:CZK:5438793600">Czech</option>
+						<option value="en-gb:DKK:5438793500">Denmark</option>
+						<option value="en-gb:EUR:5438793500">Finland</option>
+						<option value="fr-fr:EUR:5438761500">France</option>
+						<option value="de-de:EUR:5438761400">Germany</option>
+						<option value="en-us:USD:5438481600" selected>USA</option>
+						<option value="en-gb:GBP:5438792700">United Kingdom</option>
+						<option value="en-gb:GBP:5438792700">Ireland</option>
+						<option value="it-it:EUR:5438796100">Italy</option>
+						<option value="sv-se:SEK:5438761600">Sweden</option>
+						<option value="fr-fr:EUR:5438795600">Luxembourg</option>
+						<option value="pl-pl:PLN:5438797600">Poland</option>
+						<option value="en-gb:EUR:5438792700">Portugal</option>
+						<option value="es-es:EUR:5438794700">Spain</option>
+						<option value="no-no:NOK:5438797100">Norway</option>
+						<option value="nl-nl:EUR:5438796600">Netherlands</option>
 					</select>
 				  </div>
 			</div>
